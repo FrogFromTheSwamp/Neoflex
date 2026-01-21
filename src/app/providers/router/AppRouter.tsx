@@ -1,21 +1,20 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-import LoginPage from '../../../pages/login/ui/LoginPage';
-import UsersPage from '../../../pages/users/ui/UsersPage';
+import { Routes, Route} from 'react-router-dom';
+import { LoginPage } from '../../../pages/login/ui/LoginPage';
+import {UsersPage} from '../../../pages/users/ui/UsersPage';
 import { Result } from 'antd';
 
 export function AppRouter() {
-  const token = localStorage.getItem('token');
 
   return (
     <Routes>
       <Route
         path="/login"
-        element={token ? <Navigate to="/users" /> : <LoginPage />}
+        element={<LoginPage /> }
       />
 
       <Route
         path="/users"
-        element={token ? <UsersPage /> : <Navigate to="/login" />}
+        element={<UsersPage /> }
       />
 
       <Route
