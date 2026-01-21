@@ -4,9 +4,13 @@ import { Button, List, Avatar } from 'antd';
 import { User } from '../../../entities/user/types/user';
 import { useAuthGuard } from '../../../features/auth/model/useAuthGuard';
 import { ErrorMessage } from '../../../shared/ui/ErrorMessage';
+import { useState } from 'react';
+import { CreateUserModal } from '../../../features/users/create/ui/CreateUserModal';
 
 export function UsersPage() {
   useAuthGuard(); 
+
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
 
   const { data, isLoading, error } = useUsers();
 
@@ -38,8 +42,10 @@ export function UsersPage() {
       {error && <ErrorMessage message='Ошибка загрузки пользователей' /> }
 
       <div style={{ marginTop: 24, textAlign: 'left' }}>
-        <Button type="primary">Создать пользователя</Button>
+        <Button type="primary" onClick={() => setIsCreateOpen(true)}>Создать пользователя</Button>
       </div>
+
+      <CreateUserModal open={isCreateOpen} onClose={() => setIsCreateOpen(false)} />
     </div>
   );
 }
